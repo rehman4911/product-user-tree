@@ -20,6 +20,15 @@
       stroke: #999;
       stroke-width: 2px;
     }
+    .root circle {
+      fill: #f4c542;
+      stroke: #333;
+      stroke-width: 3px;
+    }
+    .root text {
+      font-weight: bold;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -140,7 +149,7 @@
       .data(root.descendants())
       .enter()
       .append("g")
-      .attr("class", "node")
+      .attr("class", d => d.depth === 0 ? "node root" : "node")
       .attr("transform", d => `translate(${d.y},${d.x})`);
 
     node.append("circle")
