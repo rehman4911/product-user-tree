@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product User Tree</title>
+  <title>VMware VCF Product User Tree</title>
   <style>
     body {
       font-family: sans-serif;
@@ -23,12 +23,12 @@
   </style>
 </head>
 <body>
-  <svg width="1200" height="1200"></svg>
+  <svg width="1600" height="1600"></svg>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
     const data = {
-      name: "Products",
+      name: "VMware VCF",
       children: [
         {
           name: "NSX-T",
@@ -114,8 +114,8 @@
       ]
     };
 
-    const width = 1200;
-    const height = 1200;
+    const width = 1600;
+    const height = 1600;
 
     const svg = d3.select("svg")
       .attr("width", width)
