@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Product User Tree</title>
   <style>
+    body {
+      font-family: sans-serif;
+    }
     .node circle {
       fill: #6fa8dc;
       stroke: #333;
@@ -20,34 +23,99 @@
   </style>
 </head>
 <body>
-  <svg width="800" height="600"></svg>
+  <svg width="1200" height="1200"></svg>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
     const data = {
-      name: "NSX-T",
+      name: "Products",
       children: [
         {
-          name: "NSX Manager",
+          name: "NSX-T",
           children: [
-            { name: "root" },
-            { name: "admin" },
-            { name: "audit" }
+            {
+              name: "NSX Manager",
+              children: [
+                { name: "root" },
+                { name: "admin" },
+                { name: "audit" }
+              ]
+            },
+            {
+              name: "NSX Edge Nodes",
+              children: [
+                { name: "root" },
+                { name: "admin" },
+                { name: "audit" }
+              ]
+            }
           ]
         },
         {
-          name: "NSX Edge Nodes",
+          name: "SDDC Manager",
           children: [
             { name: "root" },
+            { name: "vcf" },
             { name: "admin" },
-            { name: "audit" }
+            { name: "admin@local" }
+          ]
+        },
+        {
+          name: "Log Insight",
+          children: [
+            { name: "root" },
+            { name: "admin" }
+          ]
+        },
+        {
+          name: "Network Insight",
+          children: [
+            { name: "support" },
+            { name: "consoleuser" },
+            { name: "admin@local" }
+          ]
+        },
+        {
+          name: "Aria Automation",
+          children: [
+            { name: "root" }
+          ]
+        },
+        {
+          name: "Aria Operation",
+          children: [
+            { name: "root" },
+            { name: "admin" }
+          ]
+        },
+        {
+          name: "Aria Operation (collector)",
+          children: [
+            { name: "root" },
+            { name: "admin" }
+          ]
+        },
+        {
+          name: "Identity Manager",
+          children: [
+            { name: "root" },
+            { name: "sshuser" },
+            { name: "admin" },
+            { name: "configadmin" }
+          ]
+        },
+        {
+          name: "Lifecycle Manager",
+          children: [
+            { name: "root" },
+            { name: "vcfadmin" }
           ]
         }
       ]
     };
 
-    const width = 800;
-    const height = 600;
+    const width = 1200;
+    const height = 1200;
 
     const svg = d3.select("svg")
       .attr("width", width)
