@@ -1,0 +1,160 @@
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VMware VCF Password Change Workflow Checklist</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    details {
+      margin-bottom: 20px;
+    }
+    summary {
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .task {
+      margin-left: 20px;
+      margin-bottom: 5px;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>VMware VCF Workflow Checklist</h1>
+
+  <details open>
+    <summary>vRLI</summary>
+    <div class="task"><input type="checkbox">Take snapshot (without poweroff) from vRSLCM</div>
+    <div class="section-title">Root/admin Password Change</div>
+    <div class="task"><input type="checkbox">Login to SDDC manager (personal user)</div>
+    <div class="task"><input type="checkbox">Administration → Security → Password Management</div>
+    <div class="task"><input type="checkbox">Select VRLI in Component</div>
+    <div class="task"><input type="checkbox">Select root/admin users → update → new password</div>
+    <div class="task"><input type="checkbox">Verify root/admin user password change by ssh/gui login</div>
+    <div class="task"><input type="checkbox">Change VRLI adapter password in vROps</div>
+  </details>
+
+  <details>
+    <summary>vRNI/vRNIc</summary>
+    <div class="section-title">Support User</div>
+    <div class="task"><input type="checkbox">Login to vRNI VM via SSH or Console as consoleuser</div>
+    <div class="task"><input type="checkbox">Run: modify-password system --user support</div>
+    <div class="task"><input type="checkbox">Set new password and confirm</div>
+
+    <div class="section-title">Consoleuser User</div>
+    <div class="task"><input type="checkbox">Run: modify-password system --user consoleuser</div>
+    <div class="task"><input type="checkbox">Set new password and confirm</div>
+
+    <div class="section-title">admin@local User</div>
+    <div class="task"><input type="checkbox">Run: modify-password ui --user admin@local</div>
+    <div class="task"><input type="checkbox">Set new password and confirm</div>
+
+    <div class="section-title">vRSLCM Inventory Sync</div>
+    <div class="task"><input type="checkbox">Login to vRSLCM (vcfadmin)</div>
+    <div class="task"><input type="checkbox">Lifecycle Operations → Environments → dhk-cross-region-environment → view details</div>
+    <div class="task"><input type="checkbox">vRNI → Trigger Inventory Sync → submit</div>
+    <div class="task"><input type="checkbox">Retry with new password alias if failed</div>
+  </details>
+
+  <details>
+    <summary>vRA</summary>
+    <div class="task"><input type="checkbox">Take snapshot (without poweroff) from vRSLCM</div>
+    <div class="section-title">Root Password Change</div>
+    <div class="task"><input type="checkbox">Login to SDDC manager (personal user)</div>
+    <div class="task"><input type="checkbox">Administration → Security → Password Management</div>
+    <div class="task"><input type="checkbox">Select VRA in Component</div>
+    <div class="task"><input type="checkbox">Select root users → update → new password</div>
+    <div class="task"><input type="checkbox">Verify root user password change by ssh login</div>
+  </details>
+
+  <details>
+    <summary>vROps/vROpsc</summary>
+    <div class="task"><input type="checkbox">Take snapshot (without poweroff) from vRSLCM</div>
+    <div class="section-title">Root/admin Password Change</div>
+    <div class="task"><input type="checkbox">Login to SDDC manager (personal user)</div>
+    <div class="task"><input type="checkbox">Administration → Security → Password Management</div>
+    <div class="task"><input type="checkbox">Select VROPS in Component</div>
+    <div class="task"><input type="checkbox">Select root/admin users → update → new password</div>
+    <div class="task"><input type="checkbox">Change admin password of Collectors from CLI</div>
+    <div class="task"><input type="checkbox">Verify root/admin user password change by ssh/gui login</div>
+  </details>
+
+  <details>
+    <summary>VIDM</summary>
+    <div class="task"><input type="checkbox">Take snapshot (without memory) from vCenter (xreg-wsa01a/b/c)</div>
+    <div class="section-title">Root Password Change</div>
+    <div class="task"><input type="checkbox">Login to SDDC manager (personal user)</div>
+    <div class="task"><input type="checkbox">Administration → Security → Password Management</div>
+    <div class="task"><input type="checkbox">Select WSA in Component</div>
+    <div class="task"><input type="checkbox">Select root users → update → new password</div>
+    <div class="task"><input type="checkbox">Verify root user password change by ssh login</div>
+
+    <div class="section-title">sshuser Password Change</div>
+    <div class="task"><input type="checkbox">Login via ssh (root)</div>
+    <div class="task"><input type="checkbox">Run: passwd sshuser</div>
+    <div class="task"><input type="checkbox">Verify sshuser password change by ssh login</div>
+
+    <div class="section-title">Admin Password Change</div>
+    <div class="task"><input type="checkbox">Run: /usr/sbin/hznAdminTool setOperatorPassword --pass *Password*</div>
+    <div class="task"><input type="checkbox">Run: /usr/sbin/hznAdminTool setSystemAdminPassword --pass *Password*</div>
+    <div class="task"><input type="checkbox">Verify login to SAAS and cfg portals</div>
+
+    <div class="section-title">ConfigAdmin Password Change</div>
+    <div class="task"><input type="checkbox">Login to VIDM GUI with admin user</div>
+    <div class="task"><input type="checkbox">Reset password from Users & Groups</div>
+
+    <div class="section-title">vRSLCM Locker</div>
+    <div class="task"><input type="checkbox">Login to vRSLCM (vcfadmin)</div>
+    <div class="task"><input type="checkbox">Locker → Passwords → Add Password</div>
+
+    <div class="section-title">vRSLCM Inventory Sync</div>
+    <div class="task"><input type="checkbox">Lifecycle Operations → Environments → globalenvironments → view details</div>
+    <div class="task"><input type="checkbox">Trigger Inventory Sync → submit</div>
+
+    <div class="section-title">Password Expiration Check</div>
+    <div class="task"><input type="checkbox">Login to VIDM → Dashboard → Check expiration</div>
+
+    <div class="section-title">User Sync Status</div>
+    <div class="task"><input type="checkbox">Identity & Access Management → Sync Now → Sync Directory</div>
+
+    <div class="section-title">Calendar Schedule Set</div>
+    <div class="task"><input type="checkbox">Set calendar schedule for next password change</div>
+  </details>
+
+  <details>
+    <summary>vRSLCM</summary>
+    <div class="task"><input type="checkbox">Take snapshot (without poweroff) from vRSLCM</div>
+    <div class="section-title">Root/vcfadmin Password Change</div>
+    <div class="task"><input type="checkbox">Login to SDDC manager (personal user)</div>
+    <div class="task"><input type="checkbox">Administration → Security → Password Management</div>
+    <div class="task"><input type="checkbox">Select VRSLCM in Component</div>
+    <div class="task"><input type="checkbox">Select root/vcfadmin users → update → new password</div>
+    <div class="task"><input type="checkbox">Verify root/vcfadmin user password change by ssh/gui login</div>
+
+    <div class="section-title">Final Verification</div>
+    <div class="task"><input type="checkbox">Verify from SDDC manager → ssh → lookup_password</div>
+    <div class="task"><input type="checkbox">Change all adapters password from vROps</div>
+  </details>
+
+</body>
+</html>
+"""
+
+# Save the HTML content to a file
+with open("vmware_vcf_workflow_checklist.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Interactive workflow checklist HTML file has been generated successfully.")
+
